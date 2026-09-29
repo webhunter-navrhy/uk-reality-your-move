@@ -1,0 +1,193 @@
+/* Replika „Ivy Interior Studio" — byty. Teplá hnědá deska, tmavá fotka
+   s patkovým nadpisem, krémový blok fotka + text, tmavý pruh s fotkou.
+   Newsreader (patkové písmo) + Instrument Sans (drobný text). */
+@font-face{font-family:"Ivy Serif";src:url(fonts/ivy-Newsreader-latin-ext.woff2)format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Ivy Serif";src:url(fonts/ivy-Newsreader-latin.woff2)format('woff2');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Ivy Serif";src:url(fonts/ivy-Newsreader-Italic-latin-ext.woff2)format('woff2');font-weight:400;font-style:italic;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Ivy Serif";src:url(fonts/ivy-Newsreader-Italic-latin.woff2)format('woff2');font-weight:400;font-style:italic;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+.r-ivy{--bg:#705D4E;--krem:#F7F4EF;--tma:#12110F;--ink:#2B2723;--muted:#6F665D;--line:rgba(43,39,35,.14);
+  --on-dark:#F4EFE8;--on-dark-2:rgba(244,239,232,.68);--line-dark:rgba(244,239,232,.16);--dark:#12110F;
+  --display:"Ivy Serif",Georgia,serif;--body:"Instrument Sans",system-ui,sans-serif;
+  --m:clamp(8px,3.4vw,56px);--pad:clamp(18px,3.1vw,46px);
+  background:var(--bg);color:var(--ink);font-weight:400;font-size:15px;line-height:1.6}
+.r-ivy em{font-style:italic}
+
+/* deska: každý blok má stejné okraje, dohromady jedna stránka na hnědé */
+.iv-ram{max-width:1380px;margin-inline:max(var(--m),calc((100% - 1380px)/2));position:relative}
+
+/* hlavička desky */
+.iv-tabule{text-align:center;color:var(--on-dark);padding:clamp(34px,5.4vw,84px) 20px clamp(26px,4vw,60px)}
+.iv-tabule__t{font:400 clamp(1.9rem,4.4vw,4rem)/1.05 var(--display);text-transform:uppercase;letter-spacing:.035em;overflow-wrap:anywhere;text-wrap:balance}
+.iv-tabule__s{margin-top:clamp(14px,1.8vw,26px);font:400 clamp(10.5px,1.05vw,14px)/1.7 var(--body);text-transform:uppercase;letter-spacing:.3em;color:rgba(244,239,232,.86);overflow-wrap:anywhere}
+
+/* lišta — v předloze leží na fotce; po odjetí hera se připne nahoru */
+.iv-nav{position:absolute;inset:0 0 auto;z-index:4;color:#fff}
+.iv-nav__in{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:start;gap:24px;padding:clamp(18px,2.4vw,34px) var(--pad)}
+.iv-nav.plna{position:fixed;background:rgba(18,17,15,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:ivDolu .6s var(--ease) both}
+.iv-nav.plna .iv-nav__in{padding-block:14px;align-items:center}
+@keyframes ivDolu{from{transform:translateY(-100%)}to{transform:none}}
+.iv-znacka{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.iv-znacka .lg{padding:4px 7px;border-radius:2px}.iv-znacka .lg img{height:22px;max-width:110px}
+.iv-znacka__t{display:grid;min-width:0}
+.iv-znacka__t b{font:400 clamp(17px,1.5vw,21px)/1.1 var(--display);text-transform:uppercase;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iv-znacka__t small{margin-top:5px;font:400 9.5px/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase;opacity:.68;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iv-links{display:flex;gap:clamp(14px,1.6vw,24px);font:400 12.5px/1 var(--body);padding-top:9px}
+.iv-links a{text-decoration:none;opacity:.9}.iv-links a.je{text-decoration:underline;text-underline-offset:4px}
+.iv-nav.plna .iv-links{padding-top:0}
+.iv-enq{justify-self:end;font:400 11.5px/1 var(--body);text-transform:uppercase;letter-spacing:.04em;text-underline-offset:4px;padding-top:9px;white-space:nowrap}
+.iv-nav.plna .iv-enq{padding-top:0}
+
+/* hero */
+.iv-hero{height:clamp(560px,60vw,900px);overflow:hidden;background:#1d1916;color:#fff}
+.iv-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:ivZoom 16s var(--ease) both}
+@keyframes ivZoom{from{transform:scale(1.07)}to{transform:none}}
+.iv-hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(14,12,10,.66) 0%,rgba(14,12,10,.34) 42%,rgba(14,12,10,.12) 75%),linear-gradient(180deg,rgba(14,12,10,.42),transparent 22%)}
+/* fotka na výšku: rozmazaná tatáž fotka jako plocha, ostrý originál ve svém poměru */
+.iv-hero--vyska{background:#1c1a17 var(--hero) center/cover}
+.iv-hero--vyska::before{content:"";position:absolute;inset:-40px;background:inherit;filter:blur(40px) brightness(.5)}
+.iv-hero--vyska .iv-hero__img{object-fit:contain;object-position:72% 50%;animation:none}
+/* bez fotky: tmavá teplá plocha s jemným světlem jako v předloze */
+.iv-hero--bez{background:radial-gradient(ellipse 70% 90% at 78% 40%,#4a3e33,transparent 70%),linear-gradient(120deg,#171411,#2a231d)}
+.iv-hero__txt{position:absolute;z-index:2;left:var(--pad);right:var(--pad);bottom:clamp(40px,14%,150px);max-width:min(620px,86%)}
+.iv-h1{font:400 clamp(2.7rem,5.3vw,5.5rem)/1.08 var(--display);letter-spacing:-.012em;overflow-wrap:anywhere;text-wrap:balance}
+.iv-h1 em{font-style:italic}
+.iv-cara{display:block;width:clamp(44px,5.4vw,78px);height:1px;background:rgba(255,255,255,.55);margin:clamp(18px,2.2vw,30px) 0 clamp(12px,1.4vw,18px)}
+.iv-hero__p{font:400 clamp(13px,1.1vw,15.5px)/1.5 var(--body);max-width:44ch;opacity:.88}
+.iv-link{display:inline-block;margin-top:clamp(22px,2.8vw,40px);font:400 11.5px/1 var(--body);letter-spacing:.05em;text-transform:uppercase;
+  text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+
+/* krémové panely */
+.iv-panel{background:var(--krem);padding:clamp(40px,7vw,100px) var(--pad)}
+.iv-stitek{display:inline-block;font:600 11.5px/1 var(--body);letter-spacing:.07em;text-transform:uppercase;color:#3a342f;padding-bottom:8px;
+  background:linear-gradient(currentColor,currentColor) left bottom/56px 1px no-repeat;background-color:transparent}
+.iv-h2{font:400 clamp(1.95rem,3.1vw,3.1rem)/1.26 var(--display);letter-spacing:-.008em;margin-top:clamp(22px,3vw,40px);overflow-wrap:anywhere;text-wrap:balance}
+.iv-h2 em{font-style:italic}
+
+/* blok fotka + text (Our philosophy) */
+.iv-blok{display:grid;grid-template-columns:minmax(0,55.5fr) minmax(0,7.5fr) minmax(0,31fr);align-items:center}
+.iv-blok__f{grid-column:1}
+.iv-blok__f .ph{aspect-ratio:1.18/1}
+.iv-blok__f--vyska{display:flex;justify-content:flex-end}
+.iv-blok__f--vyska .ph{aspect-ratio:4/5;width:min(100%,440px)}
+.iv-blok__t{grid-column:3;min-width:0}
+.iv-blok__p{margin-top:clamp(20px,2.4vw,34px);display:grid;gap:12px;font-size:14px;line-height:1.55;color:var(--muted);max-width:46ch;overflow-wrap:anywhere}
+.iv-cena{margin-top:clamp(18px,2vw,28px);font:400 clamp(1.5rem,2vw,2rem)/1.1 var(--display);display:grid;gap:6px}
+.iv-cena span{font:600 10.5px/1.3 var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.iv-blok .iv-link{color:var(--ink)}
+.iv-blok--bez{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}
+.iv-blok--bez .iv-blok__t{grid-column:1;max-width:640px}
+.iv-blok--bez .iv-stitek{background-position:center bottom}
+.iv-blok--bez .iv-blok__p{margin-inline:auto}
+@media(max-width:860px){
+  .iv-blok{grid-template-columns:minmax(0,1fr);gap:36px}
+  .iv-blok__t{grid-column:1}
+  .iv-blok__f--vyska{justify-content:flex-start}
+}
+
+/* tmavý pruh (Project story) */
+.iv-pruh{display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);background:var(--tma);color:var(--on-dark)}
+.iv-pruh__t{padding:clamp(48px,7vw,110px) clamp(24px,5vw,80px) clamp(48px,7vw,110px) clamp(18px,8.8vw,120px);align-self:center;min-width:0}
+.iv-pruh .iv-stitek{color:var(--on-dark);background-image:none;padding-bottom:0;font-size:11px}
+.iv-pruh__h{margin-top:clamp(22px,3vw,40px);font:400 clamp(1.8rem,2.9vw,2.9rem)/1.18 var(--display);overflow-wrap:anywhere;text-wrap:balance}
+.iv-pruh__h small{display:block;font-size:.72em;opacity:.72;margin-top:.2em}
+.iv-pruh__f{min-height:100%}
+.iv-pruh__f .ph{height:100%;min-height:clamp(300px,34vw,520px);background:#2a2520}
+.iv-pruh--vyska{grid-template-columns:minmax(0,60fr) minmax(0,40fr)}
+.iv-pruh--vyska .iv-pruh__f .ph{aspect-ratio:4/5;min-height:0}
+.iv-pruh--bez{grid-template-columns:minmax(0,1fr)}
+.iv-pruh--bez .iv-pruh__t{max-width:900px}
+@media(max-width:760px){
+  .iv-pruh,.iv-pruh--vyska{grid-template-columns:minmax(0,1fr)}
+  .iv-pruh__t{padding:48px var(--pad) 40px}
+  .iv-pruh__f .ph{min-height:0;aspect-ratio:4/3}
+  .iv-pruh--vyska .iv-pruh__f .ph{aspect-ratio:4/5}
+}
+
+/* popis */
+.iv-popis{display:grid;grid-template-columns:minmax(0,38fr) minmax(0,7fr) minmax(0,55fr);align-items:start}
+.iv-popis__l{grid-column:1;min-width:0}
+.iv-popis__r{grid-column:3;min-width:0;padding-top:clamp(4px,4.6vw,72px)}
+.iv-popis .prose{font-size:15px;line-height:1.72;color:#4a433c;opacity:1;max-width:64ch;overflow-wrap:anywhere}
+.iv-spec{margin:clamp(28px,3.4vw,48px) 0 0;border-top:1px solid var(--ink)}
+.iv-spec div{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.iv-spec dt{color:var(--muted)}.iv-spec dd{margin:0;text-align:right;overflow-wrap:anywhere;min-width:0}
+.iv-chips{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.iv-chips li{font:500 10.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);padding:8px 11px}
+.iv-popis .dal{color:var(--ink)}
+.iv-popis:not(:has(.iv-popis__r)){grid-template-columns:minmax(0,1fr)}
+.iv-popis:not(:has(.iv-popis__r)) .iv-popis__l{max-width:720px}
+@media(max-width:860px){.iv-popis{grid-template-columns:minmax(0,1fr)}.iv-popis__r{grid-column:1;padding-top:36px}}
+
+/* galerie */
+.iv-gal{border-top:1px solid var(--line)}
+.iv-gal__h{display:grid;gap:0;margin-bottom:clamp(32px,4.4vw,64px)}
+.iv-gal__h .iv-h2{margin-top:clamp(18px,2.4vw,30px)}
+.iv-gal__m{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(22px,2.8vw,40px) clamp(12px,1.6vw,24px);align-items:end}
+.iv-g{margin:0;display:grid;gap:10px;grid-column:span 4}
+.iv-g .ph{aspect-ratio:3/2}
+.iv-g figcaption{font:500 11px/1 var(--body);letter-spacing:.08em;color:var(--muted)}
+.iv-gal__m .iv-g:nth-child(7n+1){grid-column:span 7}
+.iv-gal__m .iv-g:nth-child(7n+2){grid-column:span 5}
+.iv-gal__m .iv-g:nth-child(7n+6){grid-column:span 5}
+.iv-gal__m .iv-g:nth-child(7n+7){grid-column:span 7}
+.iv-gal__m--1 .iv-g:first-child{grid-column:3/span 8}
+.iv-gal__m--2 .iv-g:nth-child(2){grid-column:span 5}
+.iv-gal__m--v .iv-g,.iv-gal__m--v .iv-g:nth-child(n){grid-column:span 3}
+.iv-gal__m--v .iv-g .ph{aspect-ratio:3/4}
+.iv-gal__vse{margin-top:clamp(36px,4.4vw,60px)}
+.iv-vse{color:var(--ink);border-radius:0;text-transform:uppercase;letter-spacing:.06em;font-size:11.5px}
+.iv-vse .btn__i{border-radius:0}
+@media(max-width:760px){
+  .iv-gal__m{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .iv-gal__m .iv-g,.iv-gal__m .iv-g:nth-child(n),.iv-gal__m--v .iv-g:nth-child(n){grid-column:span 1}
+  .iv-gal__m:not(.iv-gal__m--v) .iv-g:nth-child(3n+1){grid-column:1/-1}
+  .iv-gal__m--1 .iv-g:first-child{grid-column:1/-1}
+}
+
+/* sdílené sekce jako krémové desky */
+.r-ivy .iv-zbytek>section,.r-ivy .iv-zbytek>section:is(#mapa,#parametry,#video,#dokumenty){max-width:1380px;margin-inline:max(var(--m),calc((100% - 1380px)/2));background:var(--krem);
+  padding:clamp(48px,7vw,100px) var(--pad);border-top:1px solid var(--line)}
+.iv-zbytek .shell{width:100%;max-width:none}
+.iv-zbytek .sec-h{display:block;margin-bottom:clamp(28px,4vw,56px)}
+.iv-zbytek .sec-h .eyebrow{display:inline-block;font:600 11.5px/1 var(--body);letter-spacing:.07em;text-transform:uppercase;opacity:1;color:#3a342f;
+  padding-bottom:8px;background:linear-gradient(currentColor,currentColor) left bottom/56px 1px no-repeat}
+.iv-zbytek .sec-h h2{display:block;margin-top:clamp(18px,2.4vw,30px);font:400 clamp(1.95rem,3.1vw,3.1rem)/1.2 var(--display);letter-spacing:-.008em}
+.iv-zbytek .map{border-radius:0}
+.iv-zbytek .map__place{padding-inline:12px;overflow-wrap:anywhere}
+.iv-zbytek .btn{border-radius:0}
+.iv-zbytek .params dd{min-width:0}
+.iv-zbytek .dokumenty a{border-radius:0}
+.iv-zbytek .media-karta{border-radius:0}
+
+/* kontakt jako tmavý pruh */
+.iv-kontakt{margin-bottom:var(--m)}
+.iv-kontakt .iv-pruh__t{padding-block:clamp(56px,7vw,120px)}
+.iv-agent{display:flex;align-items:center;gap:16px;margin-top:clamp(28px,3.4vw,48px);font-size:13.5px;color:var(--on-dark-2)}
+.iv-agent__f{width:64px;height:76px;object-fit:cover;flex:none;filter:grayscale(.2)}
+.iv-agent__jm{font:400 clamp(1.3rem,1.7vw,1.6rem)/1.2 var(--display);color:var(--on-dark);overflow-wrap:anywhere}
+.iv-agent>div{min-width:0}
+.iv-kontakty{display:grid;gap:4px;margin-top:22px;font-size:15px}
+.iv-kontakty a{text-decoration:none;justify-self:start;border-bottom:1px solid var(--line-dark);overflow-wrap:anywhere;max-width:100%}
+.iv-adr{margin-top:14px;font-size:12.5px;color:var(--on-dark-2);overflow-wrap:anywhere}
+.iv-cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px 22px;margin-top:clamp(28px,3vw,40px)}
+.iv-btn{background:var(--krem);color:var(--ink);border-radius:0;text-transform:uppercase;letter-spacing:.07em;font-size:11.5px;padding:8px 8px 8px 22px;max-width:100%}
+.iv-btn span{overflow-wrap:anywhere}
+.iv-btn .btn__i{border-radius:0;background:var(--accent);color:#fff}
+.iv-k__lg{border-radius:0;padding:8px 12px}.iv-k__lg img{height:30px;max-width:150px}
+
+/* patička */
+.r-ivy .pata{background:var(--bg);color:rgba(244,239,232,.7)}
+.r-ivy .pata__in{border-top:0;max-width:1380px;margin-inline:auto;padding-top:0}
+.r-ivy .pata a{color:inherit}
+
+@media(max-width:1000px){.iv-links{display:none}.iv-nav__in{grid-template-columns:minmax(0,1fr) auto}}
+@media(max-width:700px){
+  .iv-hero{height:auto;min-height:max(560px,84svh)}
+  .iv-hero__txt{bottom:36px;max-width:none}
+  .iv-znacka:has(.lg) .iv-znacka__t small{display:none}
+  .iv-enq{font-size:10.5px}
+  .iv-pruh__t{padding-left:var(--pad)}
+}
+@media(max-width:420px){.iv-znacka .lg{display:none}}

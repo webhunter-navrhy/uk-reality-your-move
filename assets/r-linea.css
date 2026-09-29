@@ -1,0 +1,99 @@
+/* Replika „Linea Loft" — byty. Desky na světle šedé, Inter Tight, velké
+   nadpisy na střed, očíslované fotky s přesahujícím popiskem. */
+@font-face{font-family:"Inter Tight";src:url(fonts/InterTight-latin-ext.woff2)format('woff2');font-weight:300 600;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Inter Tight";src:url(fonts/InterTight-latin.woff2)format('woff2');font-weight:300 600;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+.r-linea{--bg:#E6E4DF;--deska:#F3F3F1;--ink:#141414;--muted:#6B6A66;--line:rgba(20,20,20,.12);--dark:#141414;
+  --display:"Inter Tight",system-ui,sans-serif;--body:"Inter Tight",system-ui,sans-serif;
+  --m:clamp(10px,1.6vw,22px);font-weight:400;letter-spacing:-.01em;background:var(--bg)}
+.r-linea .sec-h h2{font-weight:500;letter-spacing:-.04em;font-family:var(--display)}
+
+/* desky */
+.ll-deska{max-width:1480px;margin:var(--m) auto;margin-inline:max(var(--m),calc((100vw - 1480px)/2));
+  box-shadow:0 30px 60px -40px rgba(0,0,0,.35),0 2px 6px -2px rgba(0,0,0,.06)}
+.ll-panel{background:var(--deska);padding:clamp(56px,7vw,110px) clamp(16px,2.2vw,32px) clamp(56px,7vw,100px)}
+
+/* lišta */
+.ll-nav{position:fixed;inset:0 0 auto;z-index:20;color:#fff;transition:background .5s var(--ease),color .5s var(--ease)}
+.ll-nav.plna{background:rgba(243,243,241,.9);color:var(--ink);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.ll-nav__in{display:flex;align-items:center;gap:28px;height:68px;padding:0 calc(var(--m) + clamp(16px,2.2vw,32px))}
+.ll-znacka{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto;font-weight:500;font-size:15px;min-width:0}
+.ll-znacka .lg{padding:4px 8px;border-radius:3px}.ll-znacka .lg img{height:22px}
+.ll-znacka>span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ll-links{display:flex;gap:28px;font-size:13px}.ll-links a{text-decoration:none}
+.ll-pill{text-decoration:none;font-size:13px;padding:8px 16px;border-radius:999px;border:1px solid currentColor}
+
+/* hero */
+.ll-hero{position:relative;height:min(92svh,860px);margin-top:var(--m);overflow:hidden;background:#2a241f;color:#fff}
+.ll-hero__img{width:100%;height:100%;object-fit:cover;animation:llZoom 14s var(--ease) both}
+/* fotka na výšku: rozmazaná tatáž fotka jako plocha, ostrý originál ve svém poměru */
+.ll-hero--vyska{background:#1c1a17 var(--hero) center/cover}
+.ll-hero--vyska::before{content:"";position:absolute;inset:-30px;background:inherit;filter:blur(40px) brightness(.55)}
+.ll-hero--vyska .ll-hero__img{position:relative;object-fit:contain;animation:none}
+@keyframes llZoom{from{transform:scale(1.06)}to{transform:none}}
+.ll-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(0,0,0,.34),rgba(0,0,0,.08) 65%),linear-gradient(0deg,rgba(0,0,0,.25),transparent 40%);pointer-events:none}
+.ll-hero__txt{position:absolute;inset:0;z-index:1;display:grid;place-content:center;text-align:center;padding:24px}
+.ll-hero h1{overflow-wrap:anywhere;font:500 clamp(3.4rem,10.5vw,10rem)/.9 var(--display);letter-spacing:-.055em;text-wrap:balance}
+.ll-hero p{margin-top:clamp(14px,1.6vw,24px);font-size:clamp(14px,1.25vw,18px);letter-spacing:-.01em}
+
+/* štítek + nadpis */
+.ll-stitek{text-align:center;font:500 11px/1 var(--body);letter-spacing:.02em;text-transform:uppercase}
+.ll-h2{text-align:center;font:500 clamp(2.3rem,5.2vw,5.2rem)/.98 var(--display);letter-spacing:-.045em;margin:clamp(22px,2.4vw,34px) auto clamp(48px,6vw,90px);max-width:18ch;text-wrap:balance}
+
+/* mřížka 4 sloupců */
+.ll-mriz{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.4vw,20px);align-items:start}
+.ll-k{margin:0;position:relative;display:grid}
+.ll-k__n{font-size:11px;margin-bottom:8px;letter-spacing:0}
+.ll-k .ph,.ll-k__f{aspect-ratio:4/3;width:100%;object-fit:cover;background:#d8d5cf}
+.ll-k__t{margin-top:14px;font:500 clamp(1.25rem,1.7vw,1.75rem)/1.02 var(--display);letter-spacing:-.035em;text-wrap:balance;overflow-wrap:anywhere}
+.ll-k__t:empty{display:none}
+.ll-txt{font-size:14.5px;line-height:1.42;padding-top:19px;display:grid;gap:18px;align-content:start;max-width:34ch}
+.ll-odkaz{display:inline-flex;align-items:center;gap:8px;font-size:13px;text-decoration:none;border-bottom:1px solid currentColor;justify-self:start;padding-bottom:2px}
+.ll-odkaz svg{width:16px;height:16px}
+@media(max-width:900px){.ll-mriz{grid-template-columns:1fr 1fr}.ll-txt{grid-column:1/-1;order:-1;max-width:none;padding-top:0}}
+@media(max-width:520px){.ll-mriz{grid-template-columns:1fr}}
+.ll-mriz--0{grid-template-columns:1fr;max-width:640px;margin-inline:auto;text-align:center}.ll-mriz--0 .ll-txt{max-width:none;justify-items:center}
+.ll-mriz--1,.ll-mriz--2{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.ll-mriz--1,.ll-mriz--2{grid-template-columns:1fr 1fr}}
+
+/* popis */
+.ll-popis{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(24px,4vw,64px);max-width:1180px;margin:0 auto}
+.ll-spec{margin:0;border-top:1px solid var(--ink);align-self:start}
+.ll-spec div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.ll-spec dt{color:var(--muted)}.ll-spec dd{margin:0;text-align:right;font-weight:500}
+.ll-popis .prose{max-width:66ch;font-size:15.5px;line-height:1.6;opacity:1;color:#2a2a28;overflow-wrap:anywhere}
+.ll-popis .dal{grid-column:2;justify-self:start}
+@media(max-width:860px){.ll-popis{grid-template-columns:1fr}.ll-popis .dal{grid-column:1}}
+
+/* galerie */
+.ll-gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2vw,28px) clamp(12px,1.4vw,20px);align-items:start}
+@media(max-width:700px){.ll-gal{grid-template-columns:1fr 1fr}}
+.ll-vse{text-align:center;margin-top:48px}
+.r-linea .vse{border-radius:999px}
+
+/* sdílené sekce jako desky */
+.ll-zbytek>section{max-width:1480px;margin:var(--m) auto;margin-inline:max(var(--m),calc((100vw - 1480px)/2));background:var(--deska);
+  box-shadow:0 30px 60px -40px rgba(0,0,0,.35);padding:clamp(56px,7vw,110px) clamp(16px,2.2vw,32px)}
+.ll-zbytek .sec-h{justify-content:center;text-align:center}
+.ll-zbytek .sec-h .eyebrow{font-size:11px;letter-spacing:.02em;opacity:1;color:var(--ink)}
+.ll-zbytek .sec-h h2{font-size:clamp(2.3rem,5.2vw,5.2rem);letter-spacing:-.045em;line-height:.98;width:100%}
+.ll-zbytek .map{border-radius:0}
+.ll-zbytek .shell{width:100%;max-width:1180px;margin-inline:auto}
+.ll-zbytek .map__place{padding-inline:12px;overflow-wrap:anywhere}
+
+/* kontakt */
+.ll-kontakt{margin-bottom:var(--m)}
+.ll-k__lg{justify-self:start;padding:18px 22px;border-radius:0}.ll-k__lg img{height:44px;max-width:180px}
+.ll-k__f--agent{aspect-ratio:1/1.18;max-width:200px;filter:grayscale(.2)}
+.ll-kontakty{display:grid;gap:6px;align-content:start;font:500 clamp(1.2rem,1.6vw,1.6rem)/1.15 var(--display);letter-spacing:-.03em}
+.ll-kontakty a{text-decoration:none;overflow-wrap:anywhere}
+.ll-cta{display:grid;align-content:start;justify-items:start}
+.ll-btn{background:var(--ink);color:#fff;border-radius:999px}
+.ll-btn .btn__i{background:rgba(255,255,255,.14)}
+
+.r-linea .pata{background:var(--bg);color:var(--muted)}
+.r-linea .pata__in{border-color:var(--line)}
+@media(max-width:700px){.ll-links{display:none}.ll-znacka:has(.lg)>span:last-child{display:none}.ll-hero{height:78svh}}
+.ll-vyska .ll-k .ph{aspect-ratio:3/4}
+.ll-gal.ll-vyska{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:700px){.ll-gal.ll-vyska{grid-template-columns:1fr 1fr}}

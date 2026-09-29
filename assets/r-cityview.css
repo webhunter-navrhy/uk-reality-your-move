@@ -1,0 +1,183 @@
+/* Replika „Cityview Moderne" — byty. Světlý arch na teple šedé, didotka
+   verzálkami na střed, béžové pilulky, pás fotek se šipkami, běžící řádek. */
+@font-face{font-family:"Bodoni Moda";src:url(fonts/cityview-BodoniModa-latin-ext.woff2)format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Bodoni Moda";src:url(fonts/cityview-BodoniModa-latin.woff2)format('woff2');font-weight:400 700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+.r-cityview{--bg:#E9E7E1;--arch:#F5F5F4;--bezova:#E3DCCB;--pas:#DDD6C5;--pill:#E4DBC9;--ink:#1C1B19;--muted:#6B6861;
+  --line:#D6D3CB;--tmava:#3A3733;
+  --display:"Bodoni Moda",Didot,"Bodoni 72",Georgia,serif;--body:"Hanken Grotesk",system-ui,sans-serif;
+  --m:clamp(10px,2.2vw,32px);--w:min(1400px,calc(100% - 2 * var(--m)));
+  background:var(--bg);color:var(--ink);font-weight:400;line-height:1.6}
+.r-cityview .ph{background:#DAD6CD}
+
+/* arch: každý blok je pruh stejné šířky, mezi nimi tenká mezera podkladu */
+.cv-blok,.cv-nav__in,.cv-hero__foto,.cv-zbytek>section{width:var(--w);margin-inline:auto;background:var(--arch)}
+.cv-hero__foto,.cv-blok,.cv-zbytek>section{box-shadow:0 1px 0 var(--line),0 -1px 0 var(--line)}
+
+/* lišta */
+.cv-nav{position:sticky;top:0;z-index:20;margin-top:var(--m)}
+.cv-nav__in{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;padding:18px clamp(16px,2vw,28px) 14px;
+  transition:padding .5s var(--ease),box-shadow .5s var(--ease)}
+.cv-nav.plna .cv-nav__in{padding-block:12px 10px;box-shadow:0 14px 30px -24px rgba(0,0,0,.35)}
+.cv-nav__c{grid-column:2;display:grid;justify-items:center;gap:10px;min-width:0}
+.cv-znacka{text-decoration:none;display:flex;align-items:center;min-width:0;max-width:min(560px,60vw)}
+.cv-znacka__t{font:400 clamp(20px,2vw,29px)/1.05 var(--display);text-transform:uppercase;letter-spacing:.03em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cv-znacka__lg{background:transparent;padding:0}.cv-znacka__lg img{height:34px;max-width:200px}
+.cv-links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;font:400 11px/1 var(--body);letter-spacing:.07em;text-transform:uppercase}
+.cv-links a{text-decoration:none;padding:3px 0}
+.cv-links a.on{border-bottom:1px solid currentColor}
+.cv-pill{display:inline-block;background:var(--pill);color:var(--ink);text-decoration:none;border-radius:999px;
+  font:500 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:15px 44px;transition:background .4s var(--ease)}
+.cv-pill:hover{background:color-mix(in oklab,var(--pill) 80%,var(--ink))}
+.cv-pill--s{grid-column:3;justify-self:end;padding:10px 16px;font-size:10px;white-space:nowrap}
+
+/* hero: fotka v úzkém rámu archu */
+.cv-hero__foto{padding:6px clamp(10px,1.4vw,20px) clamp(10px,1.4vw,20px)}
+.cv-hero__f{height:min(66svh,640px);min-height:320px;cursor:zoom-in}
+.cv-hero__f img{animation:cvZoom 14s var(--ease) both}
+@keyframes cvZoom{from{transform:scale(1.05)}to{transform:none}}
+.cv-hero__foto--vyska .cv-hero__f{position:relative;isolation:isolate;background:#2b2824}
+.cv-hero__foto--vyska .cv-hero__f::before{content:"";position:absolute;inset:-40px;background:var(--hero) center/cover;filter:blur(38px) brightness(.78);z-index:-1}
+.cv-hero__foto--vyska .cv-hero__f img{object-fit:contain;animation:none}
+.cv-uvod{text-align:center;padding:clamp(56px,7vw,104px) 24px clamp(56px,6.5vw,96px)}
+.cv-hero--bez .cv-uvod{padding-block:clamp(90px,14vw,190px)}
+.cv-h1{font:400 clamp(2.2rem,4.3vw,4.35rem)/1.04 var(--display);text-transform:uppercase;letter-spacing:.004em;
+  max-width:30ch;margin-inline:auto;overflow-wrap:anywhere;text-wrap:balance;font-variation-settings:"opsz" 26}
+.cv-h1 span{display:block}
+.cv-p{font:400 14px/1.65 var(--body);color:#3B3935;max-width:54ch;margin-inline:auto;overflow-wrap:anywhere}
+.cv-uvod__p{margin-top:22px}
+.cv-meta{margin-top:16px;font:500 11px/1.6 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cv-uvod .cv-pill{margin-top:30px}
+
+/* pás fotek */
+.cv-pas{margin-top:10px;padding:clamp(18px,2vw,28px) 0}
+.cv-pas__ram{position:relative}
+.cv-pas__in{display:flex;gap:clamp(10px,1vw,16px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  padding-inline:clamp(12px,1.6vw,22px);scroll-padding-inline:clamp(12px,1.6vw,22px)}
+.cv-pas__in::-webkit-scrollbar{display:none}
+.cv-pas__i{flex:0 0 31.2%;scroll-snap-align:start}
+.cv-pas__f{aspect-ratio:3/2}
+.cv-vyska .cv-pas__i{flex-basis:23%}
+.cv-vyska .cv-pas__f{aspect-ratio:3/4}
+.cv-pas--2 .cv-pas__in,.cv-pas--3 .cv-pas__in{display:grid;grid-template-columns:repeat(var(--k),minmax(0,1fr));overflow:visible}
+.cv-pas--2{--k:2}.cv-pas--3{--k:3}
+.cv-vyska.cv-pas--2 .cv-pas__in,.cv-vyska.cv-pas--3 .cv-pas__in{max-width:900px;margin-inline:auto}
+.cv-sip{position:absolute;top:50%;translate:0 -50%;width:48px;height:48px;border-radius:50%;border:0;background:var(--tmava);color:#fff;
+  display:grid;place-items:center;cursor:pointer;opacity:.92;transition:transform .5s var(--ease),opacity .3s}
+.cv-sip svg{width:20px;height:20px}
+.cv-sip:hover{opacity:1;transform:scale(1.06)}
+.cv-sip--l{left:clamp(22px,6.5vw,96px)}.cv-sip--r{right:clamp(22px,6.5vw,96px)}
+.cv-vse{text-align:center;margin-top:clamp(18px,2vw,26px)}
+
+/* obrysová pilulka */
+.cv-obrys{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:999px;
+  font:500 11px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:15px 34px;text-decoration:none;cursor:pointer;
+  transition:background .4s var(--ease),color .4s var(--ease)}
+.cv-obrys:hover{background:var(--ink);color:var(--arch)}
+.cv-obrys .btn__i{display:none}
+
+/* dělené bloky */
+.cv-split{margin-top:10px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.cv-split--sam{grid-template-columns:minmax(0,1fr)}
+.cv-split__f{position:relative;min-height:min(640px,44vw)}
+.cv-split__f>.ph{position:absolute;inset:0;height:100%}
+.cv-split__f--lepi{position:sticky;top:120px;align-self:start;min-height:0}
+.cv-split__f--lepi>.ph{position:relative;inset:auto;height:min(calc(100svh - 150px),700px)}
+.cv-vyska.cv-split--l{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)}
+.cv-vyska.cv-split--r{grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr)}
+.cv-vyska .cv-split__f{min-height:min(740px,52vw)}
+.cv-vyska.cv-split--sam{grid-template-columns:minmax(0,1fr)}
+.cv-split__t{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-width:0;
+  padding:clamp(56px,7vw,110px) clamp(22px,5vw,90px)}
+.cv-bez{background:var(--bezova)}
+.cv-h2{font:400 clamp(2rem,3.2vw,3.15rem)/1.06 var(--display);font-variation-settings:"opsz" 26;text-transform:uppercase;letter-spacing:.005em;max-width:15ch;
+  text-wrap:balance;overflow-wrap:anywhere}
+.cv-split__t .cv-p{margin-top:24px}
+.cv-kpi{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;row-gap:18px}
+.cv-kpi li{display:grid;justify-items:center;gap:6px;padding:0 clamp(16px,2vw,30px)}
+.cv-kpi li+li{border-left:1px solid rgba(28,27,25,.22)}
+.cv-kpi b{font:400 clamp(1.7rem,2.4vw,2.35rem)/1 var(--display);white-space:nowrap}
+.cv-kpi span{font:500 10.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cv-chips{margin-top:22px;font:500 10.5px/1.8 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);max-width:46ch}
+.cv-split__t .cv-obrys{margin-top:34px}
+
+/* běžící řádek */
+.cv-marq{display:flex;overflow:hidden;background:var(--pas);padding:13px 0;margin-top:10px}
+.cv-marq+.cv-split{margin-top:0}
+.cv-marq__in{display:flex;flex:none;align-items:center;white-space:nowrap;animation:cvMarq 70s linear infinite}
+.cv-marq span{font:400 clamp(1.05rem,1.45vw,1.4rem)/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.cv-marq i{font-style:normal;font-size:.8em;margin:0 clamp(16px,1.8vw,26px);opacity:.8}
+@keyframes cvMarq{to{transform:translateX(-100%)}}
+
+/* popis */
+.cv-split__t--popis{justify-content:flex-start;align-items:stretch}
+.cv-split__t--popis .cv-h2{align-self:center}
+.cv-prose{margin:34px auto 0;max-width:58ch;text-align:left;font:400 15px/1.75 var(--body);color:#33312D;opacity:1;overflow-wrap:anywhere}
+.cv-split__t--popis .dal{align-self:center;font-size:11px;letter-spacing:.12em}
+.cv-spec{margin:44px auto 0;width:100%;max-width:58ch;text-align:left;border-top:1px solid var(--ink)}
+.cv-spec div{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.cv-spec dt{font:500 10.5px/1.9 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex:none}
+.cv-spec dd{margin:0;text-align:right;overflow-wrap:anywhere;min-width:0}
+
+/* sdílené sekce jako pruhy archu */
+.cv-zbytek>section{margin-top:10px}
+.r-cityview #mapa,.r-cityview #parametry,.r-cityview #video,.r-cityview #dokumenty{padding:clamp(64px,8vw,120px) clamp(18px,5vw,80px)}
+.cv-zbytek .shell{width:100%;max-width:1120px;margin-inline:auto}
+.cv-zbytek .sec-h{display:grid;justify-items:center;text-align:center;gap:16px}
+.cv-zbytek .sec-h .eyebrow{font:500 10.5px/1 var(--body);letter-spacing:.2em;opacity:1;color:var(--muted)}
+.r-cityview .sec-h h2{font:400 clamp(2rem,3.2vw,3.15rem)/1.06 var(--display);font-variation-settings:"opsz" 26;text-transform:uppercase;letter-spacing:.005em;overflow-wrap:anywhere}
+.cv-zbytek .map{border-radius:0}
+.cv-zbytek .map__place{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;padding-inline:12px;overflow-wrap:anywhere}
+.cv-zbytek .map__ask .btn{background:var(--pill);color:var(--ink);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.cv-zbytek .params{font-size:14px}
+.cv-zbytek .params dt{font:500 10.5px/1.9 var(--body);letter-spacing:.12em;text-transform:uppercase;opacity:1;color:var(--muted)}
+.cv-zbytek .dokumenty a{border-color:var(--ink);text-align:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+/* kontakt */
+.cv-kontakt{margin-bottom:var(--m)}
+.cv-agent{display:grid;justify-items:center;gap:6px;margin-top:34px}
+.cv-agent__f{width:86px;height:86px;border-radius:50%;object-fit:cover;margin-bottom:10px;filter:grayscale(.15)}
+.cv-agent__jm{font:400 clamp(1.4rem,2vw,1.85rem)/1.1 var(--display);text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere}
+.cv-agent__r{font:500 10.5px/1.7 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);overflow-wrap:anywhere}
+.cv-agent__k{display:grid;gap:2px;margin:8px 0 4px;font-size:15px}
+.cv-agent__k a{text-decoration:none;overflow-wrap:anywhere}
+.cv-agent__k a:hover{text-decoration:underline}
+.cv-btn{margin-top:30px;background:var(--accent);color:#fff;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:7px 7px 7px 26px}
+.cv-btn .btn__i{width:34px;height:34px}
+
+.r-cityview .pata{background:transparent;color:var(--muted);width:var(--w);margin-inline:auto;padding-inline:0}
+.r-cityview .pata__in{border-color:var(--line)}
+
+/* tablet a mobil */
+@media(max-width:860px){
+  .cv-split,.cv-vyska.cv-split--l,.cv-vyska.cv-split--r{grid-template-columns:minmax(0,1fr)}
+  .cv-split__f,.cv-vyska .cv-split__f{min-height:0;order:-1}
+  .cv-split__f>.ph{position:relative;aspect-ratio:4/3}
+  .cv-vyska .cv-split__f>.ph{aspect-ratio:4/5}
+  .cv-split__f--lepi{position:relative;top:0}
+  .cv-split__f--lepi>.ph{height:auto}
+  .cv-pas__i{flex-basis:46%}
+  .cv-vyska .cv-pas__i{flex-basis:40%}
+}
+@media(max-width:700px){
+  .cv-nav__in{grid-template-columns:minmax(0,1fr) auto;padding:14px 14px 12px}
+  .cv-nav__c{grid-column:1;justify-items:start}
+  .cv-pill--s{grid-column:2}
+  .cv-links{display:none}
+  .cv-znacka{max-width:100%}
+  .cv-znacka__t{font-size:19px}
+  .cv-znacka__lg img{height:28px;max-width:150px}
+  .cv-hero__foto{padding:4px 8px 8px}
+  .cv-hero__f{height:58svh;min-height:280px}
+  .cv-uvod{padding:52px 20px 56px}
+  .cv-h1{font-size:clamp(1.85rem,8.4vw,2.4rem)}
+  .cv-pas__i{flex-basis:80%}
+  .cv-vyska .cv-pas__i{flex-basis:62%}
+  .cv-pas--2 .cv-pas__in,.cv-pas--3 .cv-pas__in{display:flex;overflow-x:auto}
+  .cv-sip{width:40px;height:40px}.cv-sip--l{left:14px}.cv-sip--r{right:14px}
+  .cv-split__t{padding:52px 20px 56px}
+  .cv-kpi li{padding:0 14px}
+  .r-cityview #mapa,.r-cityview #parametry,.r-cityview #video,.r-cityview #dokumenty{padding:56px 16px}
+}
+@media(max-width:380px){.cv-pill--s{padding:9px 12px;letter-spacing:.08em}}
